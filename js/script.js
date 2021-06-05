@@ -1,13 +1,26 @@
 let myLibrary = [];
 const display=document.querySelector("#book-display");
 const card=document.querySelector(".card");
+let id=0;
+id = localStorage.getItem("id");
+
+//get local storage books and display
+for(var i =0; i < localStorage.length; i++){
+    //ignore id key
+    if (localStorage.key(i)=="id"){
+        continue;
+    }
+    let storedBook=JSON.parse(localStorage.getItem(localStorage.key(i)));
+    displayBook(storedBook);
+}
 
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, read, id){
     this.title=title;
     this.author=author;
     this.pages=pages;
     this.read=read;
+    this.id = id;
 }
 
 function addBookToLibrary(){
@@ -17,61 +30,67 @@ function addBookToLibrary(){
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
     let read = document.querySelector("#read").checked;
-
-    const book = new Book(title, author, pages, read);
+    
+    id++;
+    //increase storage id
+    localStorage.setItem("id", `${id}`);
+    const book = new Book(title, author, pages, read, id);
     myLibrary.push(book);
-    displayBook(title, author, pages, read);
+    //store book in local storage
+    localStorage.setItem(`${id}`, JSON.stringify(book));
+    displayBook(book);
 }
 
-function displayBook(title, author, pages, read){
+function displayBook(book){
 
     //clone card template and make it visible
     let clone = card.cloneNode(true);
     clone.style.position="static";
 
-    //set attribute to array number
-    clone.setAttribute("data-index", `${myLibrary.length}`);
+    //set attribute to id
+    clone.setAttribute("data-index", `${id}`);
 
     //display the input info 
     let displayTitle = clone.querySelector(".title");
-    displayTitle.textContent += " "+title;
+    displayTitle.textContent += book.title;
     let displayAuthor = clone.querySelector(".author");
-    displayAuthor.textContent += " "+author;
+    displayAuthor.textContent += book.author;
     let displayPages = clone.querySelector(".pages");
-    displayPages.textContent += " "+pages;
-    let displayRead = clone.querySelector(".read");
+    displayPages.textContent += book.pages;
 
-    //display read message depending on if the book is read
-    if (read){
-        displayRead.textContent += " Completed";
+    const readStatus = clone.querySelector("#toggleRead");
+    if (book.read){
+        readStatus.textContent="Read";
     }
     else {
-        displayRead.textContent += " Not yet completed";
+        readStatus.textContent="Not Read";
     }
 
     //remove button
     const removeBook = clone.querySelector("#remove");
     removeBook.addEventListener("click", function removeBook(){
-        let index = this.parentNode.getAttribute("data-index");
-        console.log(index);
-        myLibrary.splice(index-1,1);
-        console.log(myLibrary);
+        //find index of deleted book and remove from array
+        let index = myLibrary.findIndex(book=> book.id == clone.getAttribute("data-index"));
+        myLibrary.splice(index, 1);
         display.removeChild(clone);
+        console.log(localStorage.removeItem(`${book.id}`));
     });
 
-    //edit info
-
     //toggle read status
-    const readStatus = clone.querySelector("#toggleRead");
     readStatus.addEventListener("click", ()=>{
-
-    })
-
+        book.read = !book.read;
+        if (book.read){
+            readStatus.textContent="Read";
+        }
+        else {
+            readStatus.textContent="Not Read";
+        }
+    });
 
     display.appendChild(clone);
 }
 
-//submit
+//submit button
 const submit = document.querySelector("#submit");
 submit.addEventListener("click", ()=> {
     addBookToLibrary();
@@ -85,7 +104,7 @@ newBook.onclick = function(){
     modal.style.display = "block";
 };
 
-//
+//close function
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -93,5 +112,3 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
   }
-
-
