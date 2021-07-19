@@ -1,8 +1,30 @@
 let myLibrary = [];
 const display=document.querySelector("#book-display");
 const card=document.querySelector(".card");
-let id=0;
-id = localStorage.getItem("id");
+let id = 0;
+id = localStorage.getItem("id"); // if there is an id in storage, get it
+
+// on first visit, set id and initialize default books
+if (id==null){
+    id = 0;
+
+    const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "318", false, 1);
+    myLibrary.push(book1);
+    id++;
+    localStorage.setItem(`${id}`, JSON.stringify(book1));
+
+    const book2 = new Book("Atomic Habits", "James Clear", "320", true, 2);
+    myLibrary.push(book2);
+    id++;
+    localStorage.setItem(`${id}`, JSON.stringify(book2));
+
+    const book3 = new Book("The Laws Of Human Nature", "Robert Greene", "624", false, 3);
+    myLibrary.push(book3);
+    id++;
+    localStorage.setItem(`${id}`, JSON.stringify(book3));
+
+    localStorage.setItem("id", `${id}`);
+}
 
 //get local storage books and display
 for(var i =0; i < localStorage.length; i++){
@@ -13,7 +35,6 @@ for(var i =0; i < localStorage.length; i++){
     let storedBook=JSON.parse(localStorage.getItem(localStorage.key(i)));
     displayBook(storedBook);
 }
-
 
 function Book(title, author, pages, read, id){
     this.title=title;
@@ -79,6 +100,9 @@ function displayBook(book){
     //toggle read status
     readStatus.addEventListener("click", ()=>{
         book.read = !book.read;
+        //save read status to localstorage
+        localStorage.setItem(book.id, JSON.stringify(book)); 
+        console.log(book.id)
         if (book.read){
             readStatus.textContent="Read";
         }
@@ -105,6 +129,10 @@ newBook.onclick = function(){
 };
 
 //close function
+let close = document.getElementById("close");
+close.onclick = () => {
+    modal.style.display="none";
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {

@@ -1,0 +1,22 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Javascript project to create a virtual library to keep track of books read using array, objects, and both local/cloud storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynkze/library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ynkze/library/issues"
+  },
+  "homepage": "https://github.com/ynkze/library#readme",
+  "dependencies": {
+    "firebase": "^8.6.8"
+  }
+}
