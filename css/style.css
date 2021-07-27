@@ -1,24 +1,90 @@
 
 
 body {
-   font-family: Arial, Helvetica, sans-serif;
+   font-family: Garamond;
    font-size: large;
+   font-weight: 500;
+   padding:0;
+   margin:0;
+   background-color: lightblue;
 }
 
 header {
-   background-color: green;
-   height: 100px;
+   min-width: 100%;
+   display: flex;
+   align-items: center;
+   height: 230px;
+   justify-content: center;
+   font-family: Garamond;
+   font-size: 40px;
+   background-color: white;
+}
+
+#book-display{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: center;
+   margin-bottom: 20px;
 }
 
 .card {
    position: absolute;
    top: -9999px;
    left: -9999px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 300px;
+   border: 1px solid gray;
+   border-radius: 22px;
+   background-color: whitesmoke;
 }
 
+.title {
+   font-weight: 700;
+}
+
+.card p {
+   text-align: center;
+}
+
+
 button {
-   font-family: Arial, Helvetica, sans-serif;
-   font-size: large;
+   width: 210px;
+   font-size: 20px;
+
+   --color: #fff;
+   --background: #275EFE;
+   --shadow: #{rgba(#00093D, .16)};
+   cursor: pointer;
+   position: relative;
+   outline: none;
+   border: none;
+   border-radius: 22px;
+   padding: 12px 32px;
+   font-weight: 500;
+   line-height: 20px;
+   transform: scale(var(--s, .97));
+   color: var(--color);
+   background: var(--background);
+}
+
+
+#newBook {
+   width: 180px;
+   margin-left: 45%;
+   margin-bottom: 20px;
+   margin-top: 20px;
+}
+
+#remove {
+   background-color: lightcoral;
+   margin-bottom: 10px;
+}
+
+#toggleRead {
+   margin-bottom: 10px;
 }
 
 /* The Modal (background) */
@@ -33,20 +99,27 @@ button {
    overflow: auto; /* Enable scroll if needed */
    background-color: rgb(0,0,0); /* Fallback color */
    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+   
  }
 
  /* Modal Content/Box */
 .modal-content {
    background-color: #fefefe;
-   margin: 15% auto; /* 15% from the top and centered */
+   margin: 20% auto;
    padding: 20px;
    border: 1px solid #888;
-   width: 50%; /* Could be more or less, depending on screen size */
- }
+   border-radius: 22px;
+   width: 400px;
+}
 
  label {
     width: 160px;
     display: inline-block;
+    margin-bottom: 20px;
+ }
+
+ #read {
+    margin-left: 0%;
  }
 
 #submitContainer {

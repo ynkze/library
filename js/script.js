@@ -73,18 +73,20 @@ function displayBook(book){
 
     //display the input info 
     let displayTitle = clone.querySelector(".title");
-    displayTitle.textContent += book.title;
+    displayTitle.textContent = "'" + book.title + "'";
     let displayAuthor = clone.querySelector(".author");
     displayAuthor.textContent += book.author;
     let displayPages = clone.querySelector(".pages");
-    displayPages.textContent += book.pages;
+    displayPages.textContent = book.pages + " pages";
 
     const readStatus = clone.querySelector("#toggleRead");
     if (book.read){
-        readStatus.textContent="Read";
+        readStatus.innerHTML="<i class=\"fas fa-book\"></i> Read";
+        readStatus.style.backgroundColor = "green";
     }
     else {
-        readStatus.textContent="Not Read";
+        readStatus.innerHTML="<i class=\"fas fa-book-open\"></i> Not Read";
+        readStatus.style.backgroundColor = "red";
     }
 
     //remove button
@@ -104,10 +106,12 @@ function displayBook(book){
         localStorage.setItem(book.id, JSON.stringify(book)); 
         console.log(book.id)
         if (book.read){
-            readStatus.textContent="Read";
+            readStatus.innerHTML="<i class=\"fas fa-book\"></i> Read";
+            readStatus.style.backgroundColor = "green";
         }
         else {
-            readStatus.textContent="Not Read";
+            readStatus.innerHTML="<i class=\"fas fa-book-open\"></i> Not Read";
+            readStatus.style.backgroundColor = "red";
         }
     });
 
