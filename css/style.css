@@ -1,7 +1,7 @@
 
 
 body {
-   font-family: Garamond;
+   font-family: Garamond, Arial, Helvetica, sans-serif;
    font-size: large;
    font-weight: 500;
    padding:0;
@@ -47,6 +47,9 @@ header {
 
 .card p {
    text-align: center;
+   height: 30px;
+   width: 280px;
+   word-wrap: break-word;
 }
 
 
@@ -68,6 +71,10 @@ button {
    transform: scale(var(--s, .97));
    color: var(--color);
    background: var(--background);
+}
+
+button:hover {
+   box-shadow: 0 0px 12px 0 rgba(0,0,0,0.5), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 
@@ -98,24 +105,31 @@ button {
    height: 100%; /* Full height */
    overflow: auto; /* Enable scroll if needed */
    background-color: rgb(0,0,0); /* Fallback color */
-   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-   
+   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
  }
 
  /* Modal Content/Box */
 .modal-content {
    background-color: #fefefe;
    margin: 20% auto;
-   padding: 20px;
+   padding-left: 20px;
+   padding-top: 20px;
    border: 1px solid #888;
    border-radius: 22px;
    width: 400px;
+   height: 350px;
 }
 
  label {
     width: 160px;
     display: inline-block;
     margin-bottom: 20px;
+    height: 30px;
+    margin-top: 20px;
+ }
+
+ input {
+    height: 25px;
  }
 
  #read {
@@ -128,15 +142,15 @@ button {
  }
 
 #close {
-   float:right;
-   margin-top:-10px;
-   margin-right:-10px;
+   float: right;
+   margin-top:-25px;
+   margin-right:-5px;
    cursor:pointer;
    color: #fff;
    border: 1px solid #AEAEAE;
    border-radius: 30px;
    background: #605F61;
-   font-size: 31px;
+   font-size: 34px;
    font-weight: bold;
    display: inline-block;
    line-height: 0px;

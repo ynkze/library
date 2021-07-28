@@ -5,5 +5,6 @@ Available at https://ynkze.github.io/library
 
 ## Learning Point
 * Creating book using object constructors/classes
+* Clone node
 * JSON stringify and parsing
 * Using localStorage to store JSON text
